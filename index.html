@@ -1,0 +1,600 @@
+<!doctype html>
+<html lang="vi">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sinh nhật Ngọc Quỳnh</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Be+Vietnam+Pro:wght@400;500;600&display=swap">
+<style>
+/* Concept: đêm tiệc. Nền cực quang tím đêm, tên khổng lồ co giãn theo con trỏ, vé ánh ngũ sắc nghiêng 3D, dải băng chạy chéo, bóng bay chạm là nổ. */
+:root {
+  --night: #0F0A2E;
+  --night-2: #1C1250;
+  --lilac: #B79CFF;
+  --pink: #FF6FB5;
+  --peach: #FFB48A;
+  --sun: #FFE27A;
+  --mint: #7CF2D0;
+  --ink: #1A0B2E;
+  --muted: #CFC6F5;
+  --display: 'Bricolage Grotesque', 'Be Vietnam Pro', system-ui, sans-serif;
+  --body: 'Be Vietnam Pro', system-ui, -apple-system, sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--night);
+  color: #fff;
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.55;
+  min-height: 100%;
+}
+
+/* nền */
+.bg {
+  position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none;
+  background:
+    radial-gradient(120% 80% at 15% 0%, #2B1B70 0%, transparent 60%),
+    radial-gradient(100% 70% at 100% 100%, #3A1470 0%, transparent 55%),
+    var(--night);
+}
+.blob { position: absolute; border-radius: 50%; filter: blur(70px); opacity: .5; animation: drift 16s ease-in-out infinite alternate; }
+.b1 { width: 52vmax; height: 52vmax; left: -16vmax; top: 4vmax; background: radial-gradient(circle, var(--pink), transparent 68%); }
+.b2 { width: 48vmax; height: 48vmax; right: -18vmax; top: 30vh; background: radial-gradient(circle, var(--lilac), transparent 68%); animation-delay: -5s; }
+.b3 { width: 34vmax; height: 34vmax; left: 20vw; bottom: -14vmax; background: radial-gradient(circle, var(--mint), transparent 68%); opacity: .3; animation-delay: -9s; }
+.b4 { width: 30vmax; height: 30vmax; right: 10vw; top: -10vmax; background: radial-gradient(circle, var(--peach), transparent 68%); opacity: .35; animation-delay: -2s; }
+@keyframes drift { from { transform: translate(0, 0) scale(1); } to { transform: translate(5vmax, -4vmax) scale(1.12); } }
+.grain {
+  position: absolute; inset: 0; opacity: .09;
+  background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* bóng bay */
+.sky { position: fixed; inset: 0; z-index: 1; overflow: hidden; pointer-events: none; }
+.balloon { position: absolute; bottom: -170px; pointer-events: auto; cursor: pointer; opacity: .72; touch-action: manipulation; }
+.sway { animation: sway 4.6s ease-in-out infinite alternate; transform-origin: 50% 100%; }
+.sway svg { display: block; width: 100%; height: auto; }
+@keyframes sway { from { transform: rotate(-6deg) translateX(-8px); } to { transform: rotate(6deg) translateX(8px); } }
+
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50; }
+
+/* khung nội dung */
+.stage { position: relative; z-index: 2; pointer-events: none; overflow-x: clip; }
+.in {
+  max-width: 860px; margin: 0 auto; position: relative;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.btn, input, .tkt, .hint { pointer-events: auto; }
+
+.top .in { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px 16px; padding-block: 18px 0; }
+.top span { display: inline-flex; align-items: center; gap: 8px; font-family: var(--display); font-weight: 700; font-size: .76rem; letter-spacing: .16em; text-transform: uppercase; }
+.dot { width: 9px; height: 9px; border-radius: 50%; background: var(--mint); box-shadow: 0 0 0 0 rgba(124, 242, 208, .7); animation: ping 2s infinite; }
+@keyframes ping { 70%, 100% { box-shadow: 0 0 0 10px rgba(124, 242, 208, 0); } }
+
+/* hero */
+.hero .in { padding-block: 34px 6px; }
+.kicker {
+  display: inline-flex; margin: 0; padding: 7px 15px; border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, .32); background: rgba(255, 255, 255, .07);
+  font-size: .88rem; font-weight: 500; color: var(--muted);
+}
+.name {
+  margin: 20px 0 0; font-family: var(--display); font-weight: 800;
+  font-size: clamp(4.2rem, 20vw, 11.5rem); line-height: .92; letter-spacing: -.045em;
+  font-optical-sizing: auto;
+}
+.name .l1 { display: block; color: #fff; }
+.name .l2 {
+  display: block; padding-block: .06em .16em;
+  background: linear-gradient(95deg, var(--pink), var(--peach) 28%, var(--sun) 50%, var(--mint) 72%, var(--lilac));
+  background-size: 220% 100%;
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent; -webkit-text-fill-color: transparent;
+  animation: shine 8s ease-in-out infinite alternate;
+}
+@keyframes shine { to { background-position: 100% 0; } }
+.ch { display: inline-block; }
+.full { margin: 8px 0 0; font-weight: 600; font-size: .8rem; letter-spacing: .26em; text-transform: uppercase; color: var(--muted); }
+.lead { margin: 20px 0 0; max-width: 42ch; color: rgba(255, 255, 255, .86); text-shadow: 0 1px 14px rgba(15, 10, 46, .95); text-wrap: pretty; }
+
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) clamp(230px, 32%, 300px); gap: 28px 36px; align-items: center; }
+.hero-text { min-width: 0; }
+.photo-wrap { position: relative; justify-self: center; width: 100%; max-width: 300px; }
+@media (min-width: 721px) { .name { font-size: clamp(5rem, 12vw, 8.4rem); } }
+@media (max-width: 720px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .photo-wrap { max-width: min(76vw, 300px); margin-top: 10px; }
+}
+.polaroid {
+  position: relative; margin: 0; background: #fff; padding: 10px 10px 50px; border-radius: 8px;
+  box-shadow: 0 26px 60px -18px rgba(0, 0, 0, .75), 0 0 0 1px rgba(255, 255, 255, .6);
+  transform: rotate(3.5deg); animation: floaty 7s ease-in-out infinite alternate;
+}
+.polaroid img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 4px; background: #E9DCF5; }
+.polaroid figcaption { position: absolute; left: 0; right: 0; bottom: 14px; text-align: center; font-family: var(--display); font-weight: 700; font-size: .95rem; letter-spacing: -.01em; color: var(--ink); }
+.polaroid::before, .polaroid::after { content: ""; position: absolute; z-index: 2; width: 86px; height: 24px; background: rgba(255, 226, 122, .82); box-shadow: 0 2px 8px rgba(0, 0, 0, .25); }
+.polaroid::before { top: -10px; left: -28px; transform: rotate(-36deg); }
+.polaroid::after { top: -10px; right: -28px; background: rgba(255, 111, 181, .82); transform: rotate(34deg); }
+@keyframes floaty { from { transform: rotate(3deg) translateY(0); } to { transform: rotate(4.6deg) translateY(-9px); } }
+.badge { position: absolute; right: -16px; top: -34px; width: clamp(84px, 22vw, 116px); z-index: 3; }
+.badge svg { display: block; width: 100%; height: auto; }
+.badge .ring { transform-origin: 60px 60px; animation: spin 24s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* dải băng */
+.ribbon { position: relative; height: 136px; overflow: hidden; margin-top: 22px; }
+.tape { position: absolute; left: -5%; width: 110%; white-space: nowrap; overflow: hidden; padding: 12px 0; font-family: var(--display); font-weight: 800; letter-spacing: .14em; font-size: 1.02rem; color: var(--ink); }
+.t1 { top: 22px; transform: rotate(-2.4deg); background: linear-gradient(90deg, var(--pink), var(--peach), var(--sun)); }
+.t2 { top: 66px; transform: rotate(1.8deg); background: linear-gradient(90deg, var(--mint), var(--lilac)); }
+.track { display: inline-block; animation: slide 34s linear infinite; }
+.t2 .track { animation-direction: reverse; }
+@keyframes slide { to { transform: translateX(-50%); } }
+
+/* vé */
+.tkt-sec .in { padding-block: 22px 10px; }
+.tkt {
+  position: relative; display: grid; grid-template-columns: 1fr 152px; overflow: hidden;
+  border-radius: 28px; border: 1px solid rgba(255, 255, 255, .3);
+  background: linear-gradient(135deg, rgba(255, 255, 255, .15), rgba(255, 255, 255, .05));
+  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+  box-shadow: 0 34px 80px -24px rgba(0, 0, 0, .7), inset 0 1px 0 rgba(255, 255, 255, .4);
+  transform: perspective(1100px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+}
+.tkt::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .26; mix-blend-mode: screen; filter: hue-rotate(var(--hue, 0deg));
+  background: conic-gradient(from var(--ang, 0deg) at var(--mx, 50%) var(--my, 50%), #FF6FB5, #FFB48A, #FFE27A, #7CF2D0, #B79CFF, #FF6FB5);
+}
+.tkt::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, .3), transparent 42%);
+}
+.tk-main, .tk-stub { position: relative; z-index: 1; }
+.tk-main { padding: clamp(20px, 4.5vw, 32px); display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+.tk-head { display: flex; justify-content: space-between; gap: 12px; font-family: var(--display); font-weight: 700; font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--mint); }
+.tk-title { margin: 0; font-family: var(--display); font-weight: 800; font-size: clamp(1.9rem, 7vw, 3rem); line-height: .98; letter-spacing: -.035em; }
+.lab { display: block; font-family: var(--display); font-weight: 700; font-size: .7rem; letter-spacing: .18em; text-transform: uppercase; color: var(--mint); }
+.tk-guest strong { display: block; font-family: var(--display); font-weight: 700; font-size: 1.3rem; line-height: 1.2; overflow-wrap: anywhere; }
+.tk-guest strong.ph { color: rgba(255, 255, 255, .5); font-weight: 500; font-size: 1.05rem; }
+.tk-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px 20px; margin: 0; }
+.tk-facts div { min-width: 0; }
+.tk-facts div:nth-child(3) { grid-column: 1 / -1; }
+.tk-facts dd { margin: 3px 0 0; font-weight: 500; font-size: .95rem; color: rgba(255, 255, 255, .92); }
+.tk-stub { border-left: 2px dashed rgba(255, 255, 255, .38); padding: 24px 16px; display: flex; flex-direction: column; justify-content: space-between; align-items: center; gap: 16px; text-align: center; }
+.num { font-family: var(--display); font-weight: 800; font-size: 1.15rem; letter-spacing: .06em; }
+.num small { display: block; margin-top: 2px; font-weight: 600; font-size: .7rem; letter-spacing: .14em; color: var(--muted); }
+.bars { display: block; width: 100%; max-width: 96px; height: 72px; border-radius: 4px; background: repeating-linear-gradient(90deg, #fff 0 2px, transparent 2px 5px, #fff 5px 6px, transparent 6px 9px, #fff 9px 12px, transparent 12px 14px, #fff 14px 15px, transparent 15px 19px); opacity: .9; }
+.vip { font-family: var(--display); font-weight: 700; font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; color: var(--sun); }
+.stamp {
+  position: absolute; z-index: 2; right: clamp(150px, 26%, 230px); bottom: 20px; pointer-events: none;
+  padding: 7px 16px; border: 4px solid var(--stamp, var(--mint)); border-radius: 12px; color: var(--stamp, var(--mint)); background: rgba(15, 10, 46, .55);
+  font-family: var(--display); font-weight: 800; font-size: clamp(1.2rem, 4.6vw, 1.7rem); letter-spacing: .1em; text-transform: uppercase; white-space: nowrap;
+  opacity: 0; transform: rotate(-10deg);
+}
+.tkt.stamped .stamp { animation: slam .55s cubic-bezier(.2, .9, .3, 1.2) forwards; }
+@keyframes slam {
+  0% { opacity: 0; transform: rotate(-10deg) scale(2.8); }
+  60% { opacity: 1; transform: rotate(-10deg) scale(.92); }
+  100% { opacity: 1; transform: rotate(-10deg) scale(1); }
+}
+@media (max-width: 600px) {
+  .tkt { grid-template-columns: 1fr; }
+  .tk-stub { border-left: 0; border-top: 2px dashed rgba(255, 255, 255, .38); flex-direction: row; padding: 16px 20px; }
+  .bars { width: 96px; height: 40px; }
+  .stamp { right: 16px; bottom: auto; top: 118px; }
+}
+
+/* RSVP */
+.rsvp-sec .in { padding-block: 26px 60px; }
+.panel { border: 1px solid rgba(255, 255, 255, .2); border-radius: 28px; background: rgba(15, 10, 46, .55); padding: clamp(20px, 5vw, 36px); }
+.panel h2 { margin: 0; font-family: var(--display); font-weight: 800; font-size: clamp(2rem, 8vw, 3.4rem); line-height: 1; letter-spacing: -.035em; }
+.panel .sub { margin: 10px 0 20px; color: var(--muted); }
+.field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 22px; max-width: 380px; }
+.field label { font-weight: 600; font-size: .9rem; }
+.field input {
+  font: inherit; color: #fff; background: rgba(255, 255, 255, .09);
+  border: 1.5px solid rgba(255, 255, 255, .4); border-radius: 14px; padding: 12px 14px;
+}
+.field input::placeholder { color: rgba(255, 255, 255, .5); }
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 18px 24px; min-height: 84px; }
+.btn { font-family: var(--display); font-weight: 800; letter-spacing: -.01em; border-radius: 999px; cursor: pointer; transition: transform .12s ease; }
+.yes {
+  border: 0; color: var(--ink); background: linear-gradient(100deg, var(--pink), var(--peach));
+  font-size: clamp(1.1rem, 4.8vw, 1.45rem); padding: 18px 32px;
+  transform-origin: left center; transform: scale(var(--g, 1));
+  animation: pulse 2.2s ease-out infinite;
+}
+.yes:active { transform: scale(var(--g, 1)) translateY(2px); }
+@keyframes pulse {
+  0% { box-shadow: 0 10px 30px -6px rgba(255, 111, 181, .6), inset 0 1px 0 rgba(255, 255, 255, .5), 0 0 0 0 rgba(255, 111, 181, .55); }
+  70%, 100% { box-shadow: 0 10px 30px -6px rgba(255, 111, 181, .6), inset 0 1px 0 rgba(255, 255, 255, .5), 0 0 0 18px rgba(255, 111, 181, 0); }
+}
+.slot { display: inline-block; }
+.no { background: rgba(255, 255, 255, .08); color: #fff; border: 1.5px solid rgba(255, 255, 255, .6); font-size: 1rem; padding: 12px 22px; min-width: 9.5rem; text-align: center; }
+.no.loose { position: fixed; z-index: 20; margin: 0; transition: left .3s cubic-bezier(.2, 1.35, .4, 1), top .3s cubic-bezier(.2, 1.35, .4, 1); }
+.btn:focus-visible, .field input:focus-visible { outline: 3px solid var(--mint); outline-offset: 3px; }
+
+.done h2 { margin: 0 0 10px; }
+.done p { margin: 0; max-width: 46ch; color: var(--muted); }
+
+.foot .in { padding-block: 10px 48px; }
+.foot p { margin: 0; font-size: .85rem; color: var(--muted); }
+
+@media (prefers-reduced-motion: reduce) {
+  .blob, .badge .ring, .track, .name .l2, .dot, .yes, .sway, .polaroid { animation: none; }
+  .no.loose { transition: none; }
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <radialGradient id="bshade" cx=".35" cy=".3" r=".8">
+      <stop offset="0" stop-color="#fff" stop-opacity=".55"/>
+      <stop offset=".5" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".3"/>
+    </radialGradient>
+    <linearGradient id="bdg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FF6FB5"/><stop offset=".5" stop-color="#FFE27A"/><stop offset="1" stop-color="#7CF2D0"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<div class="bg" aria-hidden="true">
+  <i class="blob b1"></i><i class="blob b2"></i><i class="blob b3"></i><i class="blob b4"></i>
+  <i class="grain"></i>
+</div>
+<div class="sky" id="sky" aria-hidden="true"></div>
+<canvas id="fx" aria-hidden="true"></canvas>
+
+<div class="stage">
+  <header class="top">
+    <div class="in">
+      <span><i class="dot"></i> Thiệp mời sinh nhật</span>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="in hero-grid">
+      <div class="hero-text">
+      <p class="kicker">Bạn được mời đến dự sinh nhật của</p>
+      <h1 class="name" aria-label="Ngọc Quỳnh"><span class="l1" id="l1">Ngọc</span><span class="l2" id="l2">Quỳnh</span></h1>
+      <p class="full">Vũ Thị Ngọc Quỳnh</p>
+      <p class="lead">Một buổi tối đáng nhớ thì cần có bạn.</p>
+      </div>
+      <div class="photo-wrap">
+        <figure class="polaroid">
+          <img src="assets/photo.jpg" width="960" height="1280" alt="Ngọc Quỳnh bên giàn hoa giấy hồng" decoding="async">
+          <figcaption>Nhân vật chính của đêm nay</figcaption>
+        </figure>
+      <div class="badge" aria-hidden="true">
+        <svg viewBox="0 0 120 120">
+          <defs><path id="circ" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"/></defs>
+          <g class="ring">
+            <text font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="9.5" fill="#fff"><textPath href="#circ" textLength="284" lengthAdjust="spacing">SINH NHẬT ✦ PARTY ✦ SINH NHẬT ✦ PARTY ✦ </textPath></text>
+          </g>
+          <circle cx="60" cy="60" r="27" fill="url(#bdg)"/>
+          <polygon id="star" fill="#1A0B2E" points=""/>
+        </svg>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ribbon" aria-hidden="true">
+    <div class="tape t1"><span class="track" id="tr1">HAPPY BIRTHDAY ✦ NGỌC QUỲNH ✦ </span></div>
+    <div class="tape t2"><span class="track" id="tr2">19:30 THỨ TƯ 25.11 ✦ LÊ HỒNG PHONG, HẢI PHÒNG ✦</span></div>
+  </div>
+
+  <section class="tkt-sec">
+    <div class="in">
+      <article class="tkt" id="tkt">
+        <div class="tk-main">
+          <div class="tk-head"><span>Vé mời</span><span>Admit one</span></div>
+          <h2 class="tk-title">Sinh nhật<br>Ngọc Quỳnh</h2>
+          <div class="tk-guest"><span class="lab">Khách mời</span><strong id="gOut" class="ph">Tên bạn sẽ hiện ở đây</strong></div>
+          <dl class="tk-facts">
+            <div><dt class="lab">Giờ giấc</dt><dd>19:30, Thứ Tư 25/11/2026</dd></div>
+            <div><dt class="lab">Địa điểm</dt><dd>Số 2 lô 26A Lê Hồng Phong, Hải Phòng</dd></div>
+            <div><dt class="lab">Dress code</dt><dd>Tươi tắn, thoải mái, đừng buồn ngủ</dd></div>
+          </dl>
+        </div>
+        <div class="tk-stub"><span class="num"><span id="tNum">Nº 0001</span><small id="tCode">NQ-0000</small></span><i class="bars" id="bars"></i><span class="vip" id="tVip">Bạn thân</span></div>
+        <div class="stamp" id="stamp">Đã đồng ý</div>
+      </article>
+    </div>
+  </section>
+
+  <section class="rsvp-sec">
+    <div class="in">
+      <div class="panel" id="rsvp">
+        <h2>Bạn tham gia chứ?</h2>
+        <p class="sub">Điền tên để in lên vé, rồi chốt chỗ nhé.</p>
+        <div class="field">
+          <label for="guest">Tên của bạn</label>
+          <input id="guest" type="text" maxlength="30" autocomplete="off" placeholder="Ví dụ: Minh Anh">
+        </div>
+        <div class="actions">
+          <button class="btn yes" id="yes" type="button">Đồng ý, tham gia!</button>
+          <span class="slot" id="slot"><button class="btn no" id="no" type="button">Từ chối</button></span>
+        </div>
+      </div>
+      <div class="panel done" id="done" hidden>
+        <h2>Đã chốt chỗ cho bạn!</h2>
+        <p>Hẹn gặp bạn lúc 19:30 Thứ Tư 25/11 tại số 2 lô 26A Lê Hồng Phong, Hải Phòng.</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var yes = $('yes'), no = $('no'), slot = $('slot'), guest = $('guest');
+  var rsvp = $('rsvp'), doneBox = $('done'), tkt = $('tkt'), gOut = $('gOut'), fx = $('fx'), sky = $('sky');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ngôi sao giữa huy hiệu */
+  var pts = [];
+  for (var i = 0; i < 10; i++) {
+    var r = i % 2 ? 6 : 14, a = -Math.PI / 2 + (Math.PI * 2 * i) / 10;
+    pts.push((60 + r * Math.cos(a)).toFixed(1) + ',' + (60 + r * Math.sin(a)).toFixed(1));
+  }
+  $('star').setAttribute('points', pts.join(' '));
+
+  /* dải băng */
+  function fill(id, n) { var e = $(id); e.textContent = new Array(n + 1).join(e.textContent); }
+  fill('tr1', 16); fill('tr2', 12);
+
+  /* chữ tên: tách từng ký tự */
+  var chars = [];
+  ['l1', 'l2'].forEach(function (id) {
+    var el = $(id), txt = el.textContent;
+    el.textContent = '';
+    Array.from(txt).forEach(function (c) {
+      var s = document.createElement('span');
+      s.className = 'ch'; s.textContent = c;
+      el.appendChild(s); chars.push(s);
+    });
+  });
+
+  /* tên khách hiện trực tiếp lên vé */
+  function setGuest(final) {
+    var v = guest.value.replace(/\s+/g, ' ').trim();
+    if (v) { gOut.textContent = v; gOut.classList.remove('ph'); }
+    else if (final) { gOut.textContent = 'Khách quý'; gOut.classList.remove('ph'); }
+    else { gOut.textContent = 'Tên bạn sẽ hiện ở đây'; gOut.classList.add('ph'); }
+  }
+  /* mỗi tên một vé riêng: số vé, mã, mã vạch, màu ánh, màu dấu, nhãn đều sinh từ tên + một số ngẫu nhiên của lượt mở trang */
+  var salt = (Math.random() * 4294967296) >>> 0;
+  var vips = ['Bạn thân', 'Khách danh dự', 'Thánh quẩy', 'Chuyên gia ăn bánh', 'Thợ chụp ảnh', 'Hot guest', 'Team cười to', 'Người giữ vui'];
+  var stampCols = ['#7CF2D0', '#FF6FB5', '#FFE27A', '#B79CFF', '#FFB48A', '#8EC5FF'];
+  function hash(s) {
+    var h = 2166136261;
+    for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); }
+    return h >>> 0;
+  }
+  function rng(seed) {
+    return function () {
+      seed |= 0; seed = (seed + 0x6D2B79F5) | 0;
+      var t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+  function applyTicket() {
+    var name = guest.value.replace(/\s+/g, ' ').trim().toLowerCase();
+    var rand = rng((hash(name) ^ salt) >>> 0), i;
+    $('tNum').textContent = 'Nº ' + String(1000 + Math.floor(rand() * 9000));
+    var al = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789', code = 'NQ-';
+    for (i = 0; i < 4; i++) code += al.charAt(Math.floor(rand() * al.length));
+    $('tCode').textContent = code;
+    $('tVip').textContent = vips[Math.floor(rand() * vips.length)];
+    tkt.style.setProperty('--hue', Math.floor(rand() * 360) + 'deg');
+    tkt.style.setProperty('--stamp', stampCols[Math.floor(rand() * stampCols.length)]);
+    var units = [], total = 0, n = 26;
+    for (i = 0; i < n; i++) { var u = 1 + Math.floor(rand() * 4); units.push(u); total += u; }
+    var stops = [], pos = 0;
+    for (i = 0; i < n; i++) {
+      var next = pos + units[i];
+      stops.push((i % 2 === 0 ? '#fff' : 'transparent') + ' ' + (pos / total * 100).toFixed(2) + '% ' + (next / total * 100).toFixed(2) + '%');
+      pos = next;
+    }
+    $('bars').style.background = 'linear-gradient(90deg,' + stops.join(',') + ')';
+  }
+  guest.addEventListener('input', function () { setGuest(false); applyTicket(); });
+  applyTicket();
+
+  /* con trỏ */
+  var px = -999, py = -999, lastMove = -1e9;
+  document.addEventListener('pointermove', function (e) { px = e.clientX; py = e.clientY; lastMove = performance.now(); });
+
+  /* vòng lặp: chữ co giãn + vé nghiêng */
+  var crx = 0, cry = 0;
+  function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+  function tick(t) {
+    var active = t - lastMove < 2200, rects = [], i;
+    for (i = 0; i < chars.length; i++) rects.push(chars[i].getBoundingClientRect());
+    for (i = 0; i < chars.length; i++) {
+      var k, rc = rects[i];
+      if (active) {
+        var dx = px - (rc.left + rc.width / 2), dy = py - (rc.top + rc.height / 2);
+        k = Math.exp(-(dx * dx + dy * dy) / (2 * 150 * 150));
+      } else {
+        k = (Math.sin(t / 620 - i * 0.7) + 1) / 2 * 0.7;
+      }
+      chars[i].style.fontVariationSettings = '"wght" ' + (360 + 440 * k).toFixed(0) + ', "wdth" ' + (76 + 24 * k).toFixed(1);
+    }
+    var tr = tkt.getBoundingClientRect(), tx, ty;
+    if (active) {
+      var nx = clamp((px - (tr.left + tr.width / 2)) / (window.innerWidth / 2), -1, 1);
+      var ny = clamp((py - (tr.top + tr.height / 2)) / (window.innerHeight / 2), -1, 1);
+      ty = nx * 9; tx = -ny * 7;
+    } else {
+      ty = Math.cos(t / 1900) * 5; tx = Math.sin(t / 1500) * 3;
+    }
+    crx += (tx - crx) * 0.08; cry += (ty - cry) * 0.08;
+    tkt.style.setProperty('--rx', crx.toFixed(2) + 'deg');
+    tkt.style.setProperty('--ry', cry.toFixed(2) + 'deg');
+    tkt.style.setProperty('--mx', (50 + cry * 3.4).toFixed(1) + '%');
+    tkt.style.setProperty('--my', (50 - crx * 3.4).toFixed(1) + '%');
+    tkt.style.setProperty('--ang', ((t / 28) % 360).toFixed(1) + 'deg');
+    requestAnimationFrame(tick);
+  }
+  if (reduce) {
+    chars.forEach(function (c) { c.style.fontVariationSettings = '"wght" 800, "wdth" 100'; });
+  } else {
+    requestAnimationFrame(tick);
+  }
+
+  /* pháo giấy dùng chung */
+  var ps = [], running = false, ctx = null, dpr = 1;
+  function sizeFx() {
+    dpr = window.devicePixelRatio || 1;
+    fx.width = window.innerWidth * dpr; fx.height = window.innerHeight * dpr;
+    ctx = fx.getContext('2d'); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  sizeFx();
+  window.addEventListener('resize', sizeFx);
+  var palette = ['#FF6FB5', '#FFB48A', '#FFE27A', '#7CF2D0', '#B79CFF', '#FFFFFF'];
+  function emit(ox, oy, n, fan, colors) {
+    if (reduce) return;
+    colors = colors || palette;
+    for (var i = 0; i < n; i++) {
+      var a = fan ? -Math.PI / 2 + (Math.random() - 0.5) * Math.PI * 1.5 : Math.random() * Math.PI * 2;
+      var s = fan ? 7 + Math.random() * 11 : 3 + Math.random() * 8;
+      ps.push({
+        x: ox, y: oy, vx: Math.cos(a) * s, vy: Math.sin(a) * s,
+        w: 5 + Math.random() * 7, h: 3 + Math.random() * 6,
+        rot: Math.random() * 6.28, vr: (Math.random() - 0.5) * 0.4,
+        c: colors[(Math.random() * colors.length) | 0], age: 0, max: 110 + Math.random() * 90
+      });
+    }
+    if (!running) { running = true; requestAnimationFrame(loop); }
+  }
+  function loop() {
+    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    var alive = [];
+    for (var j = 0; j < ps.length; j++) {
+      var p = ps[j];
+      p.age++; p.vy += 0.3; p.vx *= 0.985; p.vy *= 0.985; p.x += p.vx; p.y += p.vy; p.rot += p.vr;
+      if (p.age >= p.max) continue;
+      ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot);
+      ctx.fillStyle = p.c; ctx.globalAlpha = 1 - p.age / p.max;
+      ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+      ctx.restore(); alive.push(p);
+    }
+    ps = alive;
+    if (ps.length) requestAnimationFrame(loop);
+    else { running = false; ctx.clearRect(0, 0, window.innerWidth, window.innerHeight); }
+  }
+
+  /* bóng bay */
+  var bcols = ['#FF6FB5', '#B79CFF', '#7CF2D0', '#FFE27A', '#FFB48A', '#8EC5FF'];
+  function makeBalloon(idx, total) {
+    var el = document.createElement('div');
+    var size = 54 + Math.random() * 40, col = bcols[idx % bcols.length];
+    el.className = 'balloon';
+    el.style.width = size + 'px';
+    el.style.color = col;
+    el.style.left = (4 + (idx * 90) / total + Math.random() * 5) + '%';
+    el.innerHTML = '<div class="sway"><svg viewBox="0 0 60 100"><ellipse cx="30" cy="34" rx="26" ry="32" fill="currentColor"/><ellipse cx="30" cy="34" rx="26" ry="32" fill="url(#bshade)"/><ellipse cx="21" cy="21" rx="5.5" ry="9.5" fill="#fff" opacity=".4" transform="rotate(-25 21 21)"/><path d="M26 67 L30 62 L34 67Z" fill="currentColor"/><path d="M30 67 C24 78 36 87 30 99" stroke="#fff" stroke-opacity=".55" stroke-width="1.2" fill="none"/></svg></div>';
+    sky.appendChild(el);
+    var dur = 18000 + Math.random() * 16000;
+    el.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(-135vh)' }], { duration: dur, iterations: Infinity, delay: -Math.random() * dur });
+    el.addEventListener('pointerdown', function (e) {
+      e.preventDefault();
+      var r = el.getBoundingClientRect();
+      emit(r.left + r.width / 2, r.top + r.height * 0.34, 34, false, [col, '#FFFFFF', col, '#FFE27A']);
+      el.style.display = 'none';
+      setTimeout(function () { el.style.display = ''; }, 3000);
+    });
+  }
+  if (!reduce) {
+    var N = window.innerWidth < 600 ? 6 : 11;
+    for (var b = 0; b < N; b++) makeBalloon(b, N);
+  }
+
+  /* nút Từ chối chạy trốn */
+  var tries = 0, done = false, loose = false, lastFlee = 0;
+
+  function clampNo() {
+    if (!loose) return;
+    var w = no.offsetWidth, h = no.offsetHeight, m = 16;
+    var l = parseFloat(no.style.left) || 0, t = parseFloat(no.style.top) || 0;
+    no.style.left = Math.max(m, Math.min(l, window.innerWidth - w - m)) + 'px';
+    no.style.top = Math.max(m, Math.min(t, window.innerHeight - h - m)) + 'px';
+  }
+
+  function moveAway(x, y) {
+    if (!loose) {
+      var r0 = no.getBoundingClientRect();
+      slot.style.width = r0.width + 'px';
+      slot.style.height = r0.height + 'px';
+      no.style.left = r0.left + 'px';
+      no.style.top = r0.top + 'px';
+      no.classList.add('loose');
+      loose = true;
+      void no.offsetWidth;
+    }
+    var w = no.offsetWidth, h = no.offsetHeight, m = 16;
+    var vw = window.innerWidth, vh = window.innerHeight;
+    var maxL = Math.max(m, vw - w - m), maxT = Math.max(m, vh - h - m);
+    var cur = no.getBoundingClientRect();
+    if (x == null) { x = cur.left + w / 2; y = cur.top + h / 2; }
+    var yr = yes.getBoundingClientRect();
+    var best = null, bestScore = -1e9;
+    for (var k = 0; k < 16; k++) {
+      var L = m + Math.random() * (maxL - m), T = m + Math.random() * (maxT - m);
+      var score = Math.hypot(L + w / 2 - x, T + h / 2 - y);
+      var overlap = L < yr.right + 8 && L + w > yr.left - 8 && T < yr.bottom + 8 && T + h > yr.top - 8;
+      if (overlap) score -= 600;
+      if (score > bestScore) { bestScore = score; best = [L, T]; }
+    }
+    no.style.left = best[0] + 'px';
+    no.style.top = best[1] + 'px';
+  }
+
+  function flee(x, y) {
+    if (done) return;
+    lastFlee = performance.now();
+    tries++;
+    yes.style.setProperty('--g', (1 + Math.min(tries, 6) * 0.035).toFixed(3));
+    moveAway(x, y);
+  }
+
+  no.addEventListener('pointerdown', function (e) { e.preventDefault(); flee(e.clientX, e.clientY); });
+  no.addEventListener('click', function (e) {
+    e.preventDefault();
+    if (performance.now() - lastFlee > 400) flee();
+  });
+  document.addEventListener('pointermove', function (e) {
+    if (done || e.pointerType !== 'mouse') return;
+    if (performance.now() - lastFlee < 380) return;
+    var r = no.getBoundingClientRect();
+    var d = Math.hypot(e.clientX - (r.left + r.width / 2), e.clientY - (r.top + r.height / 2));
+    if (d < Math.max(110, r.width * 0.9)) flee(e.clientX, e.clientY);
+  });
+  window.addEventListener('resize', clampNo);
+
+  /* đồng ý */
+  yes.addEventListener('click', function () {
+    if (done) return;
+    done = true;
+    setGuest(true);
+    var yr = yes.getBoundingClientRect();
+    rsvp.hidden = true;
+    doneBox.hidden = false;
+    tkt.classList.add('stamped');
+    emit(yr.left + yr.width / 2, Math.min(yr.top + yr.height / 2, window.innerHeight * 0.7), 200, true);
+    tkt.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+    setTimeout(function () { emit(window.innerWidth * 0.2, window.innerHeight * 0.8, 80, true); emit(window.innerWidth * 0.8, window.innerHeight * 0.8, 80, true); }, 350);
+  });
+})();
+</script>
+
+</html>
