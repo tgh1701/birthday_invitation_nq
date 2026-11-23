@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Be+Vietnam+Pro:wght@400;500;600&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
 /* Concept: đêm tiệc. Nền cực quang tím đêm, tên khổng lồ co giãn theo con trỏ, vé ánh ngũ sắc nghiêng 3D, dải băng chạy chéo, bóng bay chạm là nổ. */
 :root {
@@ -69,7 +70,7 @@ body {
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
 }
-.btn, input, .tkt, .hint { pointer-events: auto; }
+.btn, input, .tkt, .hint, .btn-export { pointer-events: auto; }
 
 .top .in { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px 16px; padding-block: 18px 0; }
 .top span { display: inline-flex; align-items: center; gap: 8px; font-family: var(--display); font-weight: 700; font-size: .76rem; letter-spacing: .16em; text-transform: uppercase; }
@@ -181,12 +182,7 @@ body {
   60% { opacity: 1; transform: rotate(-10deg) scale(.92); }
   100% { opacity: 1; transform: rotate(-10deg) scale(1); }
 }
-@media (max-width: 600px) {
-  .tkt { grid-template-columns: 1fr; }
-  .tk-stub { border-left: 0; border-top: 2px dashed rgba(255, 255, 255, .38); flex-direction: row; padding: 16px 20px; }
-  .bars { width: 96px; height: 40px; }
-  .stamp { right: 16px; bottom: auto; top: 118px; }
-}
+/* merged into responsive phone section below */
 
 /* RSVP */
 .rsvp-sec .in { padding-block: 26px 60px; }
@@ -223,6 +219,108 @@ body {
 
 .foot .in { padding-block: 10px 48px; }
 .foot p { margin: 0; font-size: .85rem; color: var(--muted); }
+
+/* Nút xuất ảnh */
+.export-wrap { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
+.btn-export {
+  font-family: var(--display); font-weight: 700; font-size: .95rem; letter-spacing: .02em;
+  border: 1.5px solid rgba(255, 255, 255, .5); border-radius: 999px; padding: 13px 26px;
+  background: rgba(255, 255, 255, .08); color: #fff; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: background .2s, transform .12s;
+  pointer-events: auto;
+}
+.btn-export:hover { background: rgba(255, 255, 255, .16); }
+.btn-export:active { transform: scale(.96); }
+.btn-export svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.export-toast {
+  position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(100px);
+  background: linear-gradient(100deg, var(--pink), var(--peach)); color: var(--ink);
+  font-family: var(--display); font-weight: 700; font-size: .95rem;
+  padding: 14px 28px; border-radius: 999px; z-index: 100;
+  opacity: 0; transition: transform .4s cubic-bezier(.2, 1.2, .4, 1), opacity .3s;
+  pointer-events: none; white-space: nowrap;
+}
+.export-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ===== RESPONSIVE TABLET (601px - 900px) ===== */
+@media (min-width: 601px) and (max-width: 900px) {
+  .hero .in { padding-block: 28px 6px; }
+  .name { font-size: clamp(3.6rem, 12vw, 6rem); }
+  .hero-grid { grid-template-columns: 1fr 220px; gap: 20px 24px; }
+  .photo-wrap { max-width: 220px; }
+  .polaroid { padding: 8px 8px 40px; }
+  .polaroid figcaption { bottom: 10px; font-size: .85rem; }
+  .tkt { grid-template-columns: 1fr 130px; border-radius: 22px; }
+  .tk-main { padding: 22px; gap: 14px; }
+  .tk-title { font-size: clamp(1.6rem, 5vw, 2.2rem); }
+  .tk-facts { grid-template-columns: 1fr 1fr; gap: 10px 16px; }
+  .panel h2 { font-size: clamp(1.8rem, 6vw, 2.6rem); }
+  .ribbon { height: 110px; }
+  .tape { font-size: .9rem; }
+  .t1 { top: 16px; }
+  .t2 { top: 52px; }
+}
+
+/* ===== RESPONSIVE PHONE (<=600px) ===== */
+@media (max-width: 600px) {
+  body { font-size: 15px; }
+  .in { padding-left: max(14px, env(safe-area-inset-left, 0px)); padding-right: max(14px, env(safe-area-inset-right, 0px)); }
+  .top .in { padding-block: 12px 0; }
+  .hero .in { padding-block: 20px 4px; }
+  .hero-grid { grid-template-columns: 1fr; gap: 16px; }
+  .hero-text { text-align: center; }
+  .kicker { font-size: .82rem; padding: 6px 13px; }
+  .name { font-size: clamp(3.2rem, 18vw, 5rem); margin-top: 14px; text-align: center; }
+  .full { font-size: .72rem; letter-spacing: .22em; text-align: center; }
+  .lead { margin: 14px auto 0; font-size: .95rem; text-align: center; }
+  .photo-wrap { max-width: min(70vw, 260px); margin: 6px auto 0; }
+  .polaroid { padding: 7px 7px 36px; border-radius: 6px; }
+  .polaroid img { border-radius: 3px; }
+  .polaroid figcaption { bottom: 9px; font-size: .82rem; }
+  .badge { right: -12px; top: -28px; }
+
+  .ribbon { height: 96px; margin-top: 16px; }
+  .tape { font-size: .82rem; padding: 10px 0; }
+  .t1 { top: 12px; }
+  .t2 { top: 48px; }
+
+  .tkt-sec .in { padding-block: 16px 8px; }
+  .tkt { grid-template-columns: 1fr; border-radius: 20px; }
+  .tk-main { padding: 18px; gap: 12px; }
+  .tk-head { font-size: .65rem; }
+  .tk-title { font-size: clamp(1.5rem, 7vw, 2rem); }
+  .tk-guest strong { font-size: 1.1rem; }
+  .tk-facts { grid-template-columns: 1fr; gap: 10px; }
+  .tk-facts dd { font-size: .88rem; }
+  .tk-stub { border-left: 0; border-top: 2px dashed rgba(255, 255, 255, .38); flex-direction: row; padding: 14px 18px; }
+  .bars { width: 80px; height: 36px; }
+  .num { font-size: 1rem; }
+  .stamp { right: 14px; bottom: auto; top: 100px; font-size: clamp(1rem, 4vw, 1.3rem); }
+
+  .rsvp-sec .in { padding-block: 18px 40px; }
+  .panel { padding: 18px; border-radius: 20px; }
+  .panel h2 { font-size: clamp(1.6rem, 7vw, 2.4rem); }
+  .panel .sub { font-size: .9rem; margin: 8px 0 16px; }
+  .field input { padding: 11px 13px; border-radius: 12px; }
+  .yes { font-size: clamp(1rem, 4.5vw, 1.3rem); padding: 15px 26px; }
+  .no { font-size: .92rem; padding: 10px 18px; }
+
+  .export-wrap { justify-content: center; }
+  .btn-export { font-size: .85rem; padding: 11px 20px; }
+
+  .foot .in { padding-block: 8px 36px; }
+  .foot p { font-size: .8rem; }
+}
+
+/* ===== VERY SMALL PHONE (<=380px) ===== */
+@media (max-width: 380px) {
+  .name { font-size: clamp(2.6rem, 16vw, 3.8rem); }
+  .photo-wrap { max-width: min(65vw, 220px); }
+  .tk-title { font-size: 1.3rem; }
+  .panel h2 { font-size: 1.4rem; }
+  .yes { padding: 13px 22px; font-size: 1rem; }
+}
 
 @media (prefers-reduced-motion: reduce) {
   .blob, .badge .ring, .track, .name .l2, .dot, .yes, .sway, .polaroid { animation: none; }
@@ -268,7 +366,7 @@ body {
       <div class="photo-wrap">
         <figure class="polaroid">
           <img src="assets/photo.jpg" width="960" height="1280" alt="Ngọc Quỳnh bên giàn hoa giấy hồng" decoding="async">
-          <figcaption>Nhân vật chính của đêm nay</figcaption>
+          <figcaption>Ngọc Quỳnh 💖</figcaption>
         </figure>
       <div class="badge" aria-hidden="true">
         <svg viewBox="0 0 120 120">
@@ -304,9 +402,21 @@ body {
         </div>
         <div class="tk-stub"><span class="num"><span id="tNum">Nº 0001</span><small id="tCode">NQ-0000</small></span><i class="bars" id="bars"></i><span class="vip" id="tVip">Bạn thân</span></div>
         <div class="stamp" id="stamp">Đã đồng ý</div>
+      <div class="export-wrap" id="exportWrap">
+        <button class="btn-export" id="exportBtn" type="button">
+          <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Lưu vé thành ảnh
+        </button>
+        <button class="btn-export" id="shareBtn" type="button">
+          <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+          Chia sẻ
+        </button>
+      </div>
       </article>
     </div>
   </section>
+
+  <div class="export-toast" id="toast"></div>
 
   <section class="rsvp-sec">
     <div class="in">
@@ -315,7 +425,7 @@ body {
         <p class="sub">Điền tên để in lên vé, rồi chốt chỗ nhé.</p>
         <div class="field">
           <label for="guest">Tên của bạn</label>
-          <input id="guest" type="text" maxlength="30" autocomplete="off" placeholder="Ví dụ: Minh Anh">
+          <input id="guest" type="text" maxlength="30" autocomplete="off" placeholder="Nhập tên của bạn">
         </div>
         <div class="actions">
           <button class="btn yes" id="yes" type="button">Đồng ý, tham gia!</button>
@@ -593,6 +703,112 @@ body {
     emit(yr.left + yr.width / 2, Math.min(yr.top + yr.height / 2, window.innerHeight * 0.7), 200, true);
     tkt.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
     setTimeout(function () { emit(window.innerWidth * 0.2, window.innerHeight * 0.8, 80, true); emit(window.innerWidth * 0.8, window.innerHeight * 0.8, 80, true); }, 350);
+  });
+
+  /* ==== XUẤT VÉ THÀNH ẢNH ==== */
+  var exportBtn = $('exportBtn'), shareBtn = $('shareBtn'), toast = $('toast');
+
+  function showToast(msg) {
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(function () { toast.classList.remove('show'); }, 2600);
+  }
+
+  function captureTicket() {
+    // Tạm dừng animation trên vé để chụp sạch
+    var oldTransform = tkt.style.transform;
+    var oldBefore = tkt.style.getPropertyValue('--rx');
+    var oldAfter = tkt.style.getPropertyValue('--ry');
+    tkt.style.transform = 'perspective(1100px) rotateX(0deg) rotateY(0deg)';
+    tkt.style.setProperty('--rx', '0deg');
+    tkt.style.setProperty('--ry', '0deg');
+
+    return html2canvas(tkt, {
+      backgroundColor: '#0F0A2E',
+      scale: 3,
+      useCORS: true,
+      logging: false,
+      borderRadius: '28px',
+      onclone: function (doc) {
+        var clonedTkt = doc.getElementById('tkt');
+        if (clonedTkt) {
+          clonedTkt.style.transform = 'none';
+          clonedTkt.style.setProperty('--rx', '0deg');
+          clonedTkt.style.setProperty('--ry', '0deg');
+        }
+      }
+    }).then(function (canvas) {
+      tkt.style.transform = oldTransform;
+      tkt.style.setProperty('--rx', oldBefore);
+      tkt.style.setProperty('--ry', oldAfter);
+      return canvas;
+    });
+  }
+
+  exportBtn.addEventListener('click', function () {
+    exportBtn.disabled = true;
+    exportBtn.style.opacity = '.6';
+    showToast('Đang tạo ảnh vé...');
+
+    captureTicket().then(function (canvas) {
+      // Tạo link download
+      var link = document.createElement('a');
+      var guestName = guest.value.replace(/\s+/g, ' ').trim() || 'khach';
+      var safeName = guestName.replace(/[^a-zA-ZÀ-ỹ0-9]/g, '_');
+      link.download = 've-sinh-nhat-ngoc-quynh-' + safeName + '.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+      showToast('Đã lưu ảnh vé! 🎉');
+      exportBtn.disabled = false;
+      exportBtn.style.opacity = '';
+    }).catch(function () {
+      showToast('Có lỗi, hãy thử lại');
+      exportBtn.disabled = false;
+      exportBtn.style.opacity = '';
+    });
+  });
+
+  shareBtn.addEventListener('click', function () {
+    shareBtn.disabled = true;
+    shareBtn.style.opacity = '.6';
+    showToast('Đang tạo ảnh vé...');
+
+    captureTicket().then(function (canvas) {
+      canvas.toBlob(function (blob) {
+        // Dùng Web Share API nếu hỗ trợ (mobile)
+        if (navigator.share && navigator.canShare) {
+          var file = new File([blob], 've-sinh-nhat-ngoc-quynh.png', { type: 'image/png' });
+          var shareData = {
+            title: 'Vé mời sinh nhật Ngọc Quỳnh',
+            text: 'Bạn nhận được vé mời sinh nhật Ngọc Quỳnh! 🎂✨ 19:30 Thứ Tư 25/11/2026',
+            files: [file]
+          };
+          if (navigator.canShare(shareData)) {
+            navigator.share(shareData).then(function () {
+              showToast('Đã chia sẻ! 🎉');
+            }).catch(function () {
+              // User hủy share, bỏ qua
+            });
+            shareBtn.disabled = false;
+            shareBtn.style.opacity = '';
+            return;
+          }
+        }
+        // Fallback: tải ảnh
+        var link = document.createElement('a');
+        link.download = 've-sinh-nhat-ngoc-quynh.png';
+        link.href = URL.createObjectURL(blob);
+        link.click();
+        setTimeout(function () { URL.revokeObjectURL(link.href); }, 5000);
+        showToast('Đã lưu ảnh vé để bạn gửi đi! 🎉');
+        shareBtn.disabled = false;
+        shareBtn.style.opacity = '';
+      }, 'image/png');
+    }).catch(function () {
+      showToast('Có lỗi, hãy thử lại');
+      shareBtn.disabled = false;
+      shareBtn.style.opacity = '';
+    });
   });
 })();
 </script>
