@@ -1508,8 +1508,8 @@
     }
     /* mỗi tên một vé riêng: số vé, mã, mã vạch, màu ánh, màu dấu, nhãn đều sinh từ tên + một số ngẫu nhiên của lượt mở trang */
     var salt = (Math.random() * 4294967296) >>> 0;
-    var vips = ['Bạn thân', 'Khách danh dự', 'Thánh quẩy', 'Chuyên gia ăn bánh', 'Thợ chụp ảnh', 'Hot guest', 'Team cười to', 'Người giữ vui'];
-    var stampCols = ['#7CF2D0', '#FF6FB5', '#FFE27A', '#B79CFF', '#FFB48A', '#8EC5FF'];
+    var vips = ['Bạn thân', 'Khách danh dự', 'Khách quý'];
+    var stampCols = ['#7CF2D0', '#FF6FB5', '#FFE27A'];
     function hash(s) {
       var h = 2166136261;
       for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); }
